@@ -6,6 +6,7 @@ package com.github.webee.json;
 public interface JSON {
     JSONObject newObject();
     JSONArray newArray();
+    Object parse(String text);
     JSONObject parseObject(String text);
     JSONArray parseArray(String text);
 }
