@@ -8,6 +8,6 @@ public enum JSONType {
     Boolean, // -> Boolean
     Number,  // -> Number
     String,  // -> String
-    Object,  // -> Map<String, Object>
+    Object,  // -> Map
     Array,   // -> Object[]
 }

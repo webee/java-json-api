@@ -53,7 +53,7 @@ public final class Utils {
     }
 
     /**
-     * convert JSONObject to a Map<String, Object> tree with pure java objects.
+     * convert JSONObject to a Map tree with pure java objects.
      * @param object the JSONObject to convert.
      * @return the pure java objects tree .
      */
