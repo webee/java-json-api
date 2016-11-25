@@ -11,6 +11,7 @@ public interface JSONObject {
     JSONType getType(String key);
 
     boolean isNull(String key);
+    // get the pure java object that correspond to it's type.
     Object get(String key);
     Boolean getBoolean(String key);
     Integer getInteger(String key);

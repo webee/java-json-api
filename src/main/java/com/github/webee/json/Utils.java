@@ -7,6 +7,11 @@ import java.util.Map;
  * Created by webee on 16/11/25.
  */
 public final class Utils {
+    /**
+     * judge value's json type.
+     * @param value the value to judge.
+     * @return the json type.
+     */
     public static JSONType getType(Object value) {
         if (value == null) {
             return JSONType.Null;
@@ -22,10 +27,19 @@ public final class Utils {
             return JSONType.Object;
         } else if (value instanceof Object[]) {
             return JSONType.Array;
+        } else if (value instanceof JSONObject) {
+            return JSONType.Object;
+        } else if (value instanceof JSONArray) {
+            return JSONType.Array;
         }
         return null;
     }
 
+    /**
+     * convert JSONArray to a Object[] array mixed tree with pure java objects.
+     * @param array the JSONArray to convert.
+     * @return the pure java objects array mixed tree.
+     */
     public static Object[] arrayToObjects(JSONArray array) {
         if (array == null) {
             return null;
@@ -38,6 +52,11 @@ public final class Utils {
         return res;
     }
 
+    /**
+     * convert JSONObject to a Map<String, Object> tree with pure java objects.
+     * @param object the JSONObject to convert.
+     * @return the pure java objects tree .
+     */
     public static Map<String, Object> objectToMap(JSONObject object) {
         if (object == null) {
             return null;
@@ -50,6 +69,11 @@ public final class Utils {
         return res;
     }
 
+    /**
+     * convert value to pure java objects.
+     * @param value the value to convert.
+     * @return pure java object.
+     */
     public static Object resolveValue(Object value) {
         if (value instanceof JSONArray) {
             return Utils.arrayToObjects((JSONArray) value);

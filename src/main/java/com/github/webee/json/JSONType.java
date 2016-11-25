@@ -4,10 +4,10 @@ package com.github.webee.json;
  * Created by webee on 16/11/25.
  */
 public enum JSONType {
-    Null,
-    Boolean,
-    Number,
-    String,
-    Object,
-    Array,
+    Null,    // -> null
+    Boolean, // -> Boolean
+    Number,  // -> Number
+    String,  // -> String
+    Object,  // -> Map<String, Object>
+    Array,   // -> Object[]
 }

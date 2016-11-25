@@ -8,6 +8,7 @@ public interface JSONArray {
     JSONType getType(int index);
 
     boolean isNull(int index);
+    // get the pure java object that correspond to it's type.
     Object get(int index);
     Boolean getBoolean(int index);
     Integer getInteger(int index);
