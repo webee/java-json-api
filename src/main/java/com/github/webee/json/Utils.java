@@ -23,10 +23,6 @@ public final class Utils {
             return JSONType.Number;
         } else if (value instanceof Boolean) {
             return JSONType.Boolean;
-        } else if (value instanceof Map) {
-            return JSONType.Object;
-        } else if (value instanceof Object[]) {
-            return JSONType.Array;
         } else if (value instanceof JSONObject) {
             return JSONType.Object;
         } else if (value instanceof JSONArray) {
@@ -104,29 +100,23 @@ public final class Utils {
 
     public static Object resolveValue(Object value, JSONType t) {
         if (t == null) {
+            if (value instanceof Map) {
+                return Utils.objectToMap((Map<String, Object>) value);
+            } else if (value instanceof Object[]) {
+                return Utils.arrayToObjects((Object[]) value);
+            }
             return null;
         }
 
         switch (t) {
             case Object:
-                if (value instanceof JSONObject) {
-                    return Utils.objectToMap((JSONObject) value);
-                } else if (value instanceof Map) {
-                    return Utils.objectToMap((Map<String, Object>) value);
-                }
-                break;
+                return Utils.objectToMap((JSONObject) value);
             case Array:
-                if (value instanceof JSONArray) {
-                    return Utils.arrayToObjects((JSONArray) value);
-                } else if (value instanceof Object[]) {
-                    return Utils.arrayToObjects((Object[]) value);
-                }
-                break;
+                return Utils.arrayToObjects((JSONArray) value);
             case Null:
                 return null;
             default:
                 return value;
         }
-        return null;
     }
 }
