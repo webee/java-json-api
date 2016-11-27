@@ -46,7 +46,19 @@ public final class Utils {
         }
         Object[] res = new Object[array.size()];
         for (int i=0; i < array.size(); i++) {
-            res[i] = array.get(i);
+            res[i] = resolveValue(array.get(i));
+        }
+
+        return res;
+    }
+
+    public static Object[] arrayToObjects(Object[] array) {
+        if (array == null) {
+            return null;
+        }
+        Object[] res = new Object[array.length];
+        for (int i=0; i < array.length; i++) {
+            res[i] = resolveValue(array[i]);
         }
 
         return res;
@@ -63,7 +75,19 @@ public final class Utils {
         }
         Map<String, Object> res = new HashMap<>();
         for (String key : object.keySet()) {
-            res.put(key, object.get(key));
+            res.put(key, resolveValue(object.get(key)));
+        }
+
+        return res;
+    }
+
+    public static Map<String, Object> objectToMap(Map<String, Object> object) {
+        if (object == null) {
+            return null;
+        }
+        Map<String, Object> res = new HashMap<>();
+        for (String key : object.keySet()) {
+            res.put(key, resolveValue(object.get(key)));
         }
 
         return res;
@@ -75,11 +99,34 @@ public final class Utils {
      * @return pure java object.
      */
     public static Object resolveValue(Object value) {
-        if (value instanceof JSONArray) {
-            return Utils.arrayToObjects((JSONArray) value);
-        } else if (value instanceof JSONObject) {
-            return Utils.objectToMap((JSONObject) value);
+        return resolveValue(value, getType(value));
+    }
+
+    public static Object resolveValue(Object value, JSONType t) {
+        if (t == null) {
+            return null;
         }
-        return value;
+
+        switch (t) {
+            case Object:
+                if (value instanceof JSONObject) {
+                    return Utils.objectToMap((JSONObject) value);
+                } else if (value instanceof Map) {
+                    return Utils.objectToMap((Map<String, Object>) value);
+                }
+                break;
+            case Array:
+                if (value instanceof JSONArray) {
+                    return Utils.arrayToObjects((JSONArray) value);
+                } else if (value instanceof Object[]) {
+                    return Utils.arrayToObjects((Object[]) value);
+                }
+                break;
+            case Null:
+                return null;
+            default:
+                return value;
+        }
+        return null;
     }
 }

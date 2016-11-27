@@ -1,5 +1,6 @@
 package com.github.webee.json;
 
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -12,6 +13,7 @@ public interface JSONObject {
 
     boolean isNull(String key);
     // get the pure java object that correspond to it's type.
+    Map<String, Object> get();
     Object get(String key);
     Boolean getBoolean(String key);
     Integer getInteger(String key);
