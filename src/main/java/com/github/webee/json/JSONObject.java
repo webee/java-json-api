@@ -1,5 +1,7 @@
 package com.github.webee.json;
 
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.Map;
 import java.util.Set;
 
@@ -16,9 +18,11 @@ public interface JSONObject {
     Map<String, Object> get();
     Object get(String key);
     Boolean getBoolean(String key);
+    BigDecimal getBigDecimal(String key);
+    BigInteger getBigInteger(String key);
+    Double getDouble(String key);
     Integer getInteger(String key);
     Long getLong(String key);
-    Double getDouble(String key);
     String getString(String key);
     JSONArray getArray(String key);
     JSONObject getObject(String key);
