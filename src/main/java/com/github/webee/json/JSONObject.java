@@ -27,8 +27,5 @@ public interface JSONObject {
     JSONArray getArray(String key);
     JSONObject getObject(String key);
 
-    Object set(String key, Object value);
-    Object remove(String key);
-
     String toJSONString();
 }

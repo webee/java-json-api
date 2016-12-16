@@ -24,9 +24,5 @@ public interface JSONArray {
     JSONArray getArray(int index);
     JSONObject getObject(int index);
 
-    boolean push(Object value);
-    Object set(int index, Object value);
-    Object remove(int index);
-
     String toJSONString();
 }
