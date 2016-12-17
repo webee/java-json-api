@@ -27,6 +27,10 @@ public final class Utils {
             return JSONType.Object;
         } else if (value instanceof JSONArray) {
             return JSONType.Array;
+        } else if (value instanceof Map) {
+            return JSONType.Object;
+        } else if (value instanceof Object[]) {
+            return JSONType.Array;
         }
         return null;
     }
@@ -99,24 +103,29 @@ public final class Utils {
     }
 
     public static Object resolveValue(Object value, JSONType t) {
-        if (t == null) {
-            if (value instanceof Map) {
-                return Utils.objectToMap((Map<String, Object>) value);
-            } else if (value instanceof Object[]) {
-                return Utils.arrayToObjects((Object[]) value);
+        if (t != null) {
+            switch (t) {
+                case Object:
+                    if (value instanceof JSONObject) {
+                        return Utils.objectToMap((JSONObject) value);
+                    } else if (value instanceof Map) {
+                        return Utils.objectToMap((Map<String, Object>) value);
+                    }
+                    break;
+                case Array:
+                    if (value instanceof JSONArray) {
+                        return Utils.arrayToObjects((JSONArray) value);
+                    } else if (value instanceof Object[]) {
+                        return Utils.arrayToObjects((Object[]) value);
+                    }
+                    break;
+                case Null:
+                    return null;
+                default:
+                    return value;
             }
-            return null;
         }
-
-        switch (t) {
-            case Object:
-                return Utils.objectToMap((JSONObject) value);
-            case Array:
-                return Utils.arrayToObjects((JSONArray) value);
-            case Null:
-                return null;
-            default:
-                return value;
-        }
+        // FIXME: some type should be ignored.
+        return null;
     }
 }
