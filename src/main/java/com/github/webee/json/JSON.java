@@ -10,6 +10,7 @@ public interface JSON {
     WritableJSONObject newObject(Map<String, Object> map);
     WritableJSONArray newArray();
     WritableJSONArray newArray(Object[] array);
+    String serialize(Object value);
     // parse to JSON domain types.
     Object parse(String text);
     JSONObject parseObject(String text);
